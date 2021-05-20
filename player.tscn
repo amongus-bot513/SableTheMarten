@@ -28,7 +28,7 @@ material/0 = null
 [node name="gunpivot" type="Spatial" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="gunpivot"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.459291 )
 mesh = SubResource( 3 )
 material/0 = null
 
