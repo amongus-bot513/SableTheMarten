@@ -20,7 +20,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43095, 0 )
 transform = Transform( 1, 0, 0, 0, 0.570767, 0.821112, 0, -0.821112, 0.570767, 0.403782, 7.92516, 4.75303 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, -0.0132761, 9.53674e-07, 0.031348 )
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0.798414, -0.740903, 0.353274 )
 mesh = SubResource( 2 )
 material/0 = null
 
@@ -28,6 +28,3 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
 shape = SubResource( 3 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.959136, 0.282944, 0, -0.282944, 0.959136, 0, 5.28437, 9.32685 )
