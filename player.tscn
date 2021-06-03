@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
+[ext_resource path="res://target.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.75
@@ -9,9 +10,6 @@ height = 1.25
 [sub_resource type="CapsuleMesh" id=2]
 radius = 0.75
 mid_height = 1.25
-
-[sub_resource type="CubeMesh" id=3]
-size = Vector3( 0.2, 0.2, 1 )
 
 [node name="player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -25,14 +23,13 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="gunpivot" type="Spatial" parent="."]
+[node name="target" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17157, 0 )
+script = ExtResource( 2 )
 
-[node name="MeshInstance" type="MeshInstance" parent="gunpivot"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.459291 )
-mesh = SubResource( 3 )
-material/0 = null
+[node name="Ray" type="RayCast" parent="target"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+cast_to = Vector3( 0, 0, 10 )
 
-[node name="pivot" type="Spatial" parent="."]
-
-[node name="Camera" type="Camera" parent="pivot"]
-transform = Transform( 1, 0, 0, 0, 0.978767, 0.204974, 0, -0.204974, 0.978767, 0, 2.34443, 5 )
+[node name="Camera" type="Camera" parent="target"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
