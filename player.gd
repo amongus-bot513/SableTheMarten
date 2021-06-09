@@ -7,8 +7,8 @@ extends KinematicBody
 #var velocity = Vector3()
 #var jumpforce : float = 10.0
 #var gravity : float = 17.0
-var on_ground = false
-var has_double_jumped = false
+#var on_ground = false
+#var has_double_jumped = false
 
 
 #func _physics_process(delta):
@@ -55,7 +55,8 @@ var has_double_jumped = false
 	#if Input.is_action_pressed("move_left"):
 		#velocity.x -= speed 
 	
-
+var on_ground = false
+var has_double_jumped = false
 var gravity = -60.0
 var max_gravity = -150.0
 var speed = 0.0
@@ -74,10 +75,11 @@ var moving = false
 var can_run = false
 var can_attack = false
 var anim = ANIM_WALK
-
+var jumpforce : float = 10.0
+var jump_num = 0
 
 var state
-enum { WALK, JUMP, ATTACK }
+enum { WALK, JUMP, }
 
 const ANIM_WALK = 0
 const ANIM_JUMP= 1
@@ -97,31 +99,29 @@ func _physics_process(delta):
 		input.z += 1
 		speed = 14
 		moving = true
-		can_run = false
-		can_attack = true
+		
+		
 	if(Input.is_action_pressed("move_backward")):
 		input.z -= 1
 		speed = 8.0
 		moving = true
-		can_run = false
-		can_attack = true
+		
+		
 	
 	
 	if(Input.is_action_pressed("move_left")):
 		input.x += 1
 		speed = 8.0
 		moving = true
-		can_run = false
+		
 	
 	if(Input.is_action_pressed("move_right")):
 		input.x -= 1
 		speed = 8.0
 		moving = true
-		can_run = false
-		can_attack = true
 		
-	if(Input.is_action_just_pressed("run")):
-		can_run = true
+		
+		
 
 	input = input.normalized()
 	
@@ -134,33 +134,49 @@ func _physics_process(delta):
 	
 	if velocity.y < max_gravity:
 		velocity.y = max_gravity
-		
 	
-	if(Input.is_action_just_pressed("jump")) and is_on_floor():
-		snap = Vector3.ZERO
+	
+	if is_on_floor():
+		on_ground = true
+	else:
+		on_ground = false
+	
+	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = jump_height
-		jumping = true
+		snap = Vector3.ZERO
 		moving = true
 		can_run = false
-		if Input.is_action_just_pressed("jump"):
-			if on_ground == true:
-				velocity.y = jump_height
-				has_double_jumped = false
-				on_ground = false
-		elif on_ground == false and has_double_jumped == false:
+	if Input.is_action_just_pressed("jump"): 
+		velocity.y = jump_height
+		if on_ground == true:
+			jumping = true
 			velocity.y = jump_height
-			has_double_jumped = true
-	else:
-		snap = Vector3.DOWN
+			has_double_jumped = false
+			on_ground = false
+		elif on_ground == false:
+			velocity.y = jump_height
+			jumping = false
 	
-	stop_on_slope = true if get_floor_velocity().x == 0 and get_floor_velocity().z == 0 else false
-
-	velocity = move_and_slide_with_snap(velocity,snap,floor_normal, stop_on_slope ,1, max_slope)
+	velocity = move_and_slide(velocity, Vector3.UP)
+	#if Input.is_action_pressed("jump") and is_on_floor():
+		#velocity.y = jumpforce
 	
-	if is_on_floor() and velocity.y < 0:
-		velocity.y = 0.0
-		jumping = false
+	#if(Input.is_action_just_pressed("jump")) and is_on_floor():
+		#snap = Vector3.ZERO
+		#velocity.y = jump_height
+		#jumping = true
+		#moving = true
+		#can_run = false
+	#else:
+		#snap = Vector3.DOWN
+	
+	#stop_on_slope = true if get_floor_velocity().x == 0 and get_floor_velocity().z == 0 else false
 
+	#velocity = move_and_slide_with_snap(velocity,snap,floor_normal, stop_on_slope ,1, max_slope)
+	
+	#if is_on_floor() and velocity.y < 0:
+		#velocity.y = 0.0
+		#jumping = false
 
 
 
