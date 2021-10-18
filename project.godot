@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Sable The Marten"
-run/main_scene="res://world.tscn"
+run/main_scene="res://titlescreen.tscn"
 config/icon="res://icon.png"
 
 [display]

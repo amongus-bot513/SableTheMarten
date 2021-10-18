@@ -1,8 +1,8 @@
 extends Spatial
 
 var sens : float = 0.1
-var minAngle : float  = -60.0
-var maxAngle : float  = 80.0
+var minAngle : float  = -10.0
+var maxAngle : float  = 10.0
 var Z = 0.0
 var ZLerp = 0.0
 

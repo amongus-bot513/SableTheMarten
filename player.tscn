@@ -1,30 +1,32 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
-[ext_resource path="res://camroot.gd" type="Script" id=2]
-[ext_resource path="res://Sable.skuffo.glb" type="PackedScene" id=3]
+[ext_resource path="res://target.gd" type="Script" id=2]
+[ext_resource path="res://Sable.skuffo (2).glb" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.792287
-height = 1.62224
+height = 2.78654
 
 [node name="sable" type="KinematicBody"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 script = ExtResource( 1 )
 
+[node name="Sableskuffo (2)" parent="." instance=ExtResource( 3 )]
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.424376, 0.0376006 )
+transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0.960127, 0 )
 shape = SubResource( 1 )
 
-[node name="Sableskuffo" parent="CollisionShape" instance=ExtResource( 3 )]
-transform = Transform( 1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 0.0376007, -1.39888 )
-
-[node name="camroot" type="Spatial" parent="."]
+[node name="Target" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.30751e-09, 1.74013, 0.0835881 )
 script = ExtResource( 2 )
 
-[node name="h" type="Spatial" parent="camroot"]
+[node name="Camera" type="Camera" parent="Target"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+far = 500.0
 
-[node name="v" type="Spatial" parent="camroot/h"]
-
-[node name="ClippedCamera" type="ClippedCamera" parent="camroot/h/v"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.42874e-07, 1.36264, 6.20975 )
+[node name="Ray" type="RayCast" parent="Target"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, 5 )
