@@ -24,6 +24,7 @@ func _physics_process(delta):
 	velocity.z = 0
 	#character movement 
 	if Input.is_action_pressed("move_forward"):
+		$SABLE_GAMEEXPORT/AnimationPlayer.play("Running-loop")
 		input.z += 1
 		speed = 8
 	if Input.is_action_pressed("move_backward"):
@@ -46,11 +47,13 @@ func _physics_process(delta):
 		velocity.y = max_gravity
 	
 	if Input.is_action_pressed("jump") and is_on_floor():
+		$SABLE_GAMEEXPORT/AnimationPlayer.play("Jump-loop")
 		velocity.y = jumpforce
 		snap = Vector3.ZERO
 	else:
 		snap = Vector3.DOWN
 	if Input.is_action_just_pressed("jump"):
+		$SABLE_GAMEEXPORT/AnimationPlayer.play("Jump-loop")
 		if on_ground == true:
 			velocity.y = jumpforce
 			has_double_jumped = false
