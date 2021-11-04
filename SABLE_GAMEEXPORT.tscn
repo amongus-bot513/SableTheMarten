@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://SABLE_GAMEEXPORT.gltf" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+[node name="SABLE_GAMEEXPORT" instance=ExtResource( 1 )]
+script = SubResource( 1 )

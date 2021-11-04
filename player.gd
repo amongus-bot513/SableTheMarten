@@ -22,7 +22,7 @@ func _physics_process(delta):
 	input = Vector3.ZERO
 	velocity.x = 0
 	velocity.z = 0
-	
+	#character movement 
 	if Input.is_action_pressed("move_forward"):
 		input.z += 1
 		speed = 8
